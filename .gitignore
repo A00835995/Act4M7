@@ -13,3 +13,4 @@ node_modules/
 # Ignorar carpetas de compilación (si usas React)
 #dist/
 #build/
+#ppee
