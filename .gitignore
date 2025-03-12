@@ -1,0 +1,15 @@
+# Ignorar la carpeta node_modules
+node_modules/
+
+# Ignorar archivos de entorno
+#.env
+
+# Ignorar archivos de dependencias bloqueadas
+#package-lock.json
+
+# Ignorar logs
+#*.log
+
+# Ignorar carpetas de compilación (si usas React)
+#dist/
+#build/
