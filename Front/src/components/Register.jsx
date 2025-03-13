@@ -1,25 +1,34 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
-import './Login.css';
+import './Register.css';
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
     console.log('Email:', email);
     console.log('Password:', password);
     navigate('/home');
   };
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
-    <Container maxWidth="sm" className="login-container">
+    <Container maxWidth="sm" className="register-container">
       <Box sx={{ mt: 8 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Login
+          Register
         </Typography>
         <form onSubmit={handleSubmit}>
           <Box sx={{ mb: 2 }}>
@@ -42,18 +51,26 @@ function Login() {
               required
             />
           </Box>
+          <Box sx={{ mb: 2 }}>
+            <TextField
+              label="Confirm Password"
+              type="password"
+              fullWidth
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </Box>
           <Button type="submit" variant="contained" color="primary" fullWidth>
-            Login
+            Register
           </Button>
         </form>
-        <Box sx={{ mt: 2 }}>
-          <Typography variant="body2">
-            Don't have an account? <Link to="/register">Register</Link>
-          </Typography>
-        </Box>
+        <Button onClick={handleBack} variant="outlined" color="secondary" fullWidth className="back-button">
+          Back to Login
+        </Button>
       </Box>
     </Container>
   );
 }
 
-export default Login;
+export default Register;

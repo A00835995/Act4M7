@@ -1,0 +1,41 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.users-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.users-paper {
+  padding: 20px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1000px; /* Ajusta este valor para hacer el cuadro más ancho */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.users-paper .MuiListItem-root {
+  border-bottom: 1px solid #ddd;
+}
+
+.users-paper .MuiListItem-root:last-child {
+  border-bottom: none;
+}
+
+.MuiDialogTitle-root {
+  background-color: #1976d2;
+  color: white;
+}
+
+.MuiDialogActions-root {
+  justify-content: space-between;
+}

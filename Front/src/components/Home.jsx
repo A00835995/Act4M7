@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from './Navbar';
 import ImageCarousel from './ImageCarousel';
 import './Home.css';
 
@@ -20,7 +19,6 @@ const theme = createTheme({
 function Home() {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
       <Box
         sx={{
           display: 'flex',

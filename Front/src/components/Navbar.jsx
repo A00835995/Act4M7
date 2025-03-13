@@ -27,6 +27,9 @@ function Navbar() {
           <Button color="inherit" component={Link} to="/contact">
             Contacto
           </Button>
+          <Button color="inherit" component={Link} to="/users">
+            Usuarios
+          </Button>
           <Button color="inherit" component={Link} to="/">
             Logout
           </Button>
