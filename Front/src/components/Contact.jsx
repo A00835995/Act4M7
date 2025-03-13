@@ -2,7 +2,6 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Navbar from './Navbar';
 import './Contact.css';
 
 const theme = createTheme({
@@ -19,7 +18,6 @@ const theme = createTheme({
 function Contact() {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
       <Box
         className="contact-container"
         sx={{
