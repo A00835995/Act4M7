@@ -1,5 +1,9 @@
 const { connection } = require('../confDB');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const SECRET_KEY = process.env.JWT_SECRET || "seguridad";
 
 exports.login = async (req, res) => {
     try {
@@ -33,11 +37,15 @@ exports.login = async (req, res) => {
                 return res.status(401).json({ message: 'Contraseña incorrecta' });
             }
 
-            const updateQuery = `UPDATE User SET LastLogin = CURRENT_TIMESTAMP WHERE ID = ?`;
-            connection.exec(updateQuery, [user.ID]);
+            const token = jwt.sign(
+                { id: user.ID, name: user.NAME, email: user.EMAIL },
+                SECRET_KEY,
+                { expiresIn: '1h' } 
+            );
 
             return res.status(200).json({
                 message: 'Login exitoso',
+                token,
                 user: {
                     id: user.ID,
                     name: user.NAME,

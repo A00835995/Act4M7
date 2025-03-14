@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -17,6 +17,7 @@ const theme = createTheme({
 });
 
 function Contact() {
+    const user = JSON.parse(localStorage.getItem("user"));
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
@@ -34,29 +35,17 @@ function Contact() {
       >
         <Box className="contact-card">
           <Typography variant="h4" component="h1" gutterBottom>
-            Contacto
+          Datos de Usuario
           </Typography>
-          <Typography variant="body1" className="contact-info">
-            Bienvenido a nuestra agencia de autos seminuevos. Ofrecemos una amplia variedad de vehículos de alta calidad a precios competitivos.
-          </Typography>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Dirección
-          </Typography>
-          <Typography variant="body1" className="contact-info">
-            Av. Garza Sada 1000, Monterrey, 64840, Nuevo León, México
-          </Typography>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Teléfono
-          </Typography>
-          <Typography variant="body1" className="contact-info">
-            +52 (81) 4756-9067
-          </Typography>
-          <Typography variant="h6" component="h2" gutterBottom>
-            Email
-          </Typography>
-          <Typography variant="body1" className="contact-info">
-            contacto@seminuevoslujomty.com
-          </Typography>
+          {user ? (
+                <Box>
+                    <Typography><strong>Nombre:</strong> {user.name}</Typography>
+                    <Typography><strong>Email:</strong> {user.email}</Typography>
+                </Box>
+            ) : (
+                <Typography color="error">No se encontró información del usuario.</Typography>
+            )}
+        
         </Box>
       </Box>
     </ThemeProvider>

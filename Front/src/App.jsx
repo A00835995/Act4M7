@@ -1,16 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
-import Home from './components/Home';
 import Contact from './components/Contact';
+import Dashboard from './components/Dashboard';
+import ProtegerRuta from './components/ProtegerRuta';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/dash" element={<ProtegerRuta> <Dashboard /> </ProtegerRuta> } />
+        <Route path="/contact" element={<ProtegerRuta> <Contact /> </ProtegerRuta> } />
       </Routes>
     </Router>
   );

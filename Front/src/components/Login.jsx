@@ -4,7 +4,7 @@ import { TextField, Button, Container, Typography, Box, Alert } from '@mui/mater
 import axios from 'axios';
 import './Login.css';
 
-const API_URL = "http://localhost:3000"; // Asegúrate de que la URL es correcta
+const API_URL = "http://localhost:3000"; 
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,10 +20,11 @@ function Login() {
 
         console.log("Respuesta del backend:", response.data); 
 
-        if (response.data.user) {
+        if (response.data.token) {
             localStorage.setItem("user", JSON.stringify(response.data.user)); 
+            localStorage.setItem("token", response.data.token); 
             console.log("Login exitoso, redirigiendo...");
-            navigate('/home'); 
+            navigate('/dash'); 
         } else {
             console.error("Error: No se recibió un usuario válido");
             setError("Error en la autenticación");

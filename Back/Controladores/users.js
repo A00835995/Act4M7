@@ -30,14 +30,24 @@ exports.getAllUsers = (req, res) => {
 exports.getUserById = (req, res) => {
     const { id } = req.params;
 
-    const query = `SELECT * FROM USER WHERE ID = ?`;
+    const query = `SELECT ID, NAME, EMAIL FROM User WHERE ID = ?`; 
 
     connection.exec(query, [id], (err, result) => {
-        if (err) return res.status(500).send({ message: 'Error al obtener usuario', error: err.message });
-        if (result.length === 0) return res.status(404).send({ message: 'Usuario no encontrado' });
-        res.status(200).json(result[0]);
+        if (err) {
+            console.error("Error al obtener usuario:", err.message);
+            return res.status(500).send({ message: 'Error al obtener usuario', error: err.message });
+        }
+
+        console.log("Resultado de la base de datos:", result);
+
+        if (!result || result.length === 0) {
+            return res.status(404).send({ message: 'Usuario no encontrado' });
+        }
+
+        res.status(200).json(result[0]); 
     });
 };
+
 
 exports.updateUser = (req, res) => {
     const { id } = req.params; 
