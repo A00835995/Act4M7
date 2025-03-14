@@ -1,20 +1,39 @@
-import React, { useState,useEffect  } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import { TextField, Button, Container, Typography, Box, Alert } from '@mui/material';
+import axios from 'axios';
 import './Login.css';
+
+const API_URL = "http://localhost:3000"; // Asegúrate de que la URL es correcta
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    navigate('/home');
-  };
-  
+    setError(null); 
+    try {
+        const response = await axios.post(`${API_URL}/login`, { email, password });
+
+        console.log("Respuesta del backend:", response.data); 
+
+        if (response.data.user) {
+            localStorage.setItem("user", JSON.stringify(response.data.user)); 
+            console.log("Login exitoso, redirigiendo...");
+            navigate('/home'); 
+        } else {
+            console.error("Error: No se recibió un usuario válido");
+            setError("Error en la autenticación");
+        }
+    } catch (error) {
+        console.error("Error en login:", error.response?.data || error.message);
+        setError(error.response?.data?.message || "Error al iniciar sesión");
+    }
+};
+
 
   return (
     <Container maxWidth="sm" className="login-container">
@@ -22,6 +41,7 @@ function Login() {
         <Typography variant="h4" component="h1" gutterBottom>
           Login
         </Typography>
+        {error && <Alert severity="error">{error}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ mb: 2 }}>
             <TextField
